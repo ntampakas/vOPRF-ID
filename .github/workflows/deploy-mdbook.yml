@@ -1,13 +1,9 @@
 name: Deploy mdBook
 
 on:
-  #push:
-  #  branches:
-  #    - main
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -15,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: {{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
